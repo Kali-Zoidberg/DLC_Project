@@ -17,6 +17,7 @@ class LoanInquiryForm {
         this.downPayment = downPayment;
         this.calculateButton = calculateButton;
         this.formChanged = false;
+        debugger;
 
     }
 
@@ -137,9 +138,11 @@ class LoanInquiryForm {
 
             //Need to handle different loanTypes
             $.post('/inquiryRefinance', postParams, function(data) {
-               const response = JSON.parse(data);
-               console.log(response);
-               debugger;
+                const response = JSON.parse(data);
+                console.log(response);
+                //Json is interpreted and then used to generate html :).
+                //@Nick
+                //Look into other frameworks than vanilla js to generate html.
             });
         });
     }

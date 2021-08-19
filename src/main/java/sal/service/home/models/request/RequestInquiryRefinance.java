@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class RequestInquiryRefinance {
 
-    @JsonProperty("type")
+    @JsonProperty("loanType")
     private String type;
     @JsonProperty("loanTerm")
     private int loanTerm;

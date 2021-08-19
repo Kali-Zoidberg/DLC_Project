@@ -1,9 +1,7 @@
 class HomeMediator extends Mediator{
-    modules = [];
     constructor(loanInquiryForm) {
         super();
         const _this = this;
-        _this.modules = modules;
         _this.loanInquiryForm = loanInquiryForm;
     }
 
