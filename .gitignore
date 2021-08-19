@@ -48,3 +48,10 @@ Thumbs.db
 *.mov
 *.wmv
 
+
+#gradle builds
+.gradle/checksums/*
+.gradle/*
+gradlew
+gradlew.bat
+.gradle/

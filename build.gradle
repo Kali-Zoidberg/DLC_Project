@@ -1,7 +1,9 @@
+
 plugins {
 	id "com.microsoft.azure.azurefunctions" version "1.5.1"
 	id 'org.springframework.boot' version '2.5.2'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'groovy'
 	id 'java'
 }
 
@@ -26,12 +28,8 @@ localDebug = "transport=dt_socket,server=y,suspend=n,address=5005"
 group = 'sal.service.home'
 version = '0.0.1'
 sourceCompatibility = '1.8'
+mainClassName = 'sal.service.home.core.RestServiceApplication'
 
-jar {
-	mainfest {
-		attributes 'Main-Class' : 'sal.service.home.core.RestServiceApplication'
-	}
-}
 repositories {
 	mavenCentral()
 }
