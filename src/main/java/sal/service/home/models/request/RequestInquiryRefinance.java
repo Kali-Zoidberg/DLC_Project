@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class RequestInquiryRefinance {
 
     @JsonProperty("loanType")
-    private String type;
+    private String loanType;
     @JsonProperty("loanTerm")
     private int loanTerm;
     @JsonProperty("loanAmount")
@@ -18,14 +18,14 @@ public class RequestInquiryRefinance {
 
     /**
      * Request for refinance inquiries
-     * @param type type of refinance
+     * @param loanType loanType of refinance
      * @param loanTerm Length of loan
      * @param loanAmount The amount of the loan
      * @param interestRate interest rate of loan
      * @param downPayment amount put down for the loan.
      */
-    public RequestInquiryRefinance(String type, int loanTerm, double loanAmount, float interestRate, double downPayment) {
-        this.type = type;
+    public RequestInquiryRefinance(String loanType, int loanTerm, double loanAmount, float interestRate, double downPayment) {
+        this.loanType = loanType;
         this.loanTerm = loanTerm;
         this.interestRate = interestRate;
         this.downPayment = downPayment;
@@ -33,10 +33,10 @@ public class RequestInquiryRefinance {
 
     /**
      *
-     * @return Returns type of refinance loan
+     * @return Returns loanType of refinance loan
      */
-    public String getType() {
-        return type;
+    public String getLoanType() {
+        return loanType;
     }
 
     /**
@@ -72,11 +72,11 @@ public class RequestInquiryRefinance {
     }
 
     /**
-     * Set loan type.
-     * @param type
+     * Set loan loanType.
+     * @param loanType
      */
-    public void setType(String type) {
-        this.type = type;
+    public void setLoanType(String loanType) {
+        this.loanType = loanType;
     }
 
     /**

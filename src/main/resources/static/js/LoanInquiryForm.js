@@ -17,7 +17,6 @@ class LoanInquiryForm {
         this.downPayment = downPayment;
         this.calculateButton = calculateButton;
         this.formChanged = false;
-        debugger;
 
     }
 
@@ -28,7 +27,6 @@ class LoanInquiryForm {
         _this.bindLoanAmountListeners();
         _this.bindInterestRateListeners();
         _this.bindDownPaymentListeners();
-
         _this.bindCalculateListener();
     }
 
@@ -137,13 +135,20 @@ class LoanInquiryForm {
             };
 
             //Need to handle different loanTypes
-            $.post('/inquiryRefinance', postParams, function(data) {
-                const response = JSON.parse(data);
-                console.log(response);
-                //Json is interpreted and then used to generate html :).
-                //@Nick
-                //Look into other frameworks than vanilla js to generate html.
+            $.ajax( {
+                url:'/inquiryRefinance',
+                type: 'POST',
+                data: JSON.stringify(postParams),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    //Json is interpreted and then used to generate html :).
+                    //@Nick
+                    //Look into other frameworks than vanilla js to generate html.
+                }
             });
+
         });
     }
 
