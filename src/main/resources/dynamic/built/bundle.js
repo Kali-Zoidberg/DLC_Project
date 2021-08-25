@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/main/resources/static/js/app.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/main/resources/dynamic/app.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -28601,10 +28601,10 @@ if (false) {} else {
 
 /***/ }),
 
-/***/ "./src/main/resources/static/js/app.js":
-/*!*********************************************!*\
-  !*** ./src/main/resources/static/js/app.js ***!
-  \*********************************************/
+/***/ "./src/main/resources/dynamic/app.js":
+/*!*******************************************!*\
+  !*** ./src/main/resources/dynamic/app.js ***!
+  \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

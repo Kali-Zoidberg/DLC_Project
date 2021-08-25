@@ -7,11 +7,11 @@ public class RequestInquiryRefinance {
     @JsonProperty("loanType")
     private String loanType;
     @JsonProperty("loanTerm")
-    private int loanTerm;
+    private double loanTerm;
     @JsonProperty("loanAmount")
     private double loanAmount;
     @JsonProperty("interestRate")
-    private float interestRate;
+    private double interestRate;
     @JsonProperty("downPayment")
     private double downPayment;
 
@@ -24,7 +24,7 @@ public class RequestInquiryRefinance {
      * @param interestRate interest rate of loan
      * @param downPayment amount put down for the loan.
      */
-    public RequestInquiryRefinance(String loanType, int loanTerm, double loanAmount, float interestRate, double downPayment) {
+    public RequestInquiryRefinance(String loanType, int loanTerm, double loanAmount, double interestRate, double downPayment) {
         this.loanType = loanType;
         this.loanTerm = loanTerm;
         this.interestRate = interestRate;
@@ -43,7 +43,7 @@ public class RequestInquiryRefinance {
      *
      * @return Returns length of loan
      */
-    public int getLoanTerm() {
+    public double getLoanTerm() {
         return loanTerm;
     }
 
@@ -51,7 +51,7 @@ public class RequestInquiryRefinance {
      *
      * @return Returns interest rate of the loan.
      */
-    public float getInterestRate() {
+    public double getInterestRate() {
         return interestRate;
     }
 
@@ -83,7 +83,7 @@ public class RequestInquiryRefinance {
      *
      * @param loanTerm
      */
-    public void setLoanTerm(int loanTerm) {
+    public void setLoanTerm(double loanTerm) {
         this.loanTerm = loanTerm;
     }
 
@@ -91,7 +91,7 @@ public class RequestInquiryRefinance {
      *
      * @param interestRate
      */
-    public void setInterestRate(float interestRate) {
+    public void setInterestRate(double interestRate) {
         this.interestRate = interestRate;
     }
 

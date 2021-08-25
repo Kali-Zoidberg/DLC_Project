@@ -1,4 +1,4 @@
-package sal.service.home.core;
+package sal.service.home.core.Controllers;
 
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicLong;
@@ -19,7 +19,8 @@ public class GreetingController {
 
 	@GetMapping("/greeting")
 	public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-		return new Greeting(counter.incrementAndGet(), String.format(template, name));
+		System.out.println("new date: " + (new Date(System.currentTimeMillis()).toString()));
+		return new Greeting(counter.incrementAndGet(), (new Date(System.currentTimeMillis()).toString()));
 	}
 	
 	@GetMapping("/aprGreeting")

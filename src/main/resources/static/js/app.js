@@ -1,5 +1,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
+import TestComponent from './components/TestComponent.js';
+
 
 class App extends React.Component {
     constructor(props) {
@@ -8,30 +10,45 @@ class App extends React.Component {
     }
 
     componentDidMount() {
+
         fetch('/greeting?name=helloworld',
             {
                 method: 'GET',
                 headers: {'content-type': 'application/json'}
-            }).then(response => {
-            this.setState({content: response.content})
+            }).then(response => response.json()).then( data =>{
+                this.setState({content: data.content})
         });
     }
 
     render() {
-        return (<TestComponent test = {this.state.content}/>
+        return (
+            <React.Fragment>
+            Time server recieved request: <TestComponent content = {this.state.content}></TestComponent>
+            </React.Fragment>
+
         );
     }
 }
 
-class TestComponent extends React.Component {
-    render() {
-        return (
-            <div> Hello! </div>
-        )
-    }
-}
 
 ReactDOM.render(
     <App />,
     document.getElementById('react')
 );
+
+async function getData(url='', redirect='follow') {
+    const response = await fetch(url,
+        {
+            method : 'GET',
+            mode : 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            redirect: redirect,
+            referrerPolicy : 'no-referrer'
+        });
+
+    return response.json();
+}
