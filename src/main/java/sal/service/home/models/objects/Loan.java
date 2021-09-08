@@ -1,6 +1,6 @@
 package sal.service.home.models.objects;
 
-import sal.service.home.models.response.ResponseInquiryRefinance;
+import sal.service.home.models.response.ResponseInquiryRefinanceModel;
 
 public abstract class Loan {
     protected double loanTermInMonths;
@@ -68,5 +68,5 @@ public abstract class Loan {
         this.interestRate = interestRate;
     }
 
-    public abstract ResponseInquiryRefinance calculate();
+    public abstract ResponseInquiryRefinanceModel calculate();
 }

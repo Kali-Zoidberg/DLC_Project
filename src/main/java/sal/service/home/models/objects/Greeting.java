@@ -1,4 +1,4 @@
-package sal.service.home;
+package sal.service.home.models.objects;
 
 public class Greeting {
 

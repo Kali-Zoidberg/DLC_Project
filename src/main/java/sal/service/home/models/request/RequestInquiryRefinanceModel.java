@@ -2,7 +2,7 @@ package sal.service.home.models.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class RequestInquiryRefinance {
+public class RequestInquiryRefinanceModel extends RequestModel {
 
     @JsonProperty("loanType")
     private String loanType;
@@ -24,9 +24,10 @@ public class RequestInquiryRefinance {
      * @param interestRate interest rate of loan
      * @param downPayment amount put down for the loan.
      */
-    public RequestInquiryRefinance(String loanType, int loanTerm, double loanAmount, double interestRate, double downPayment) {
+    public RequestInquiryRefinanceModel(String loanType, int loanTerm, double loanAmount, double interestRate, double downPayment) {
         this.loanType = loanType;
         this.loanTerm = loanTerm;
+        this.loanAmount = loanAmount;
         this.interestRate = interestRate;
         this.downPayment = downPayment;
     }

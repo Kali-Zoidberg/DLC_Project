@@ -130,10 +130,10 @@ class LoanInquiryForm {
                 'loanType' : _this.loanType.value,
                 'loanTerm' : _this.loanTerm.value,
                 'loanAmount' : _this.loanAmount.value,
-                'interestRate' : _this.interestRate.value,
+                'interestRate' : _this.interestRate.value / 100,
                 'downPayment' : _this.downPayment.value
             };
-
+            console.log(postParams);
             //Need to handle different loanTypes
             $.ajax( {
                 url:'/inquiryRefinance',

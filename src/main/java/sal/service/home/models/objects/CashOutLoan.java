@@ -1,7 +1,7 @@
-package sal.service.home.objects;
+package sal.service.home.models.objects;
 
 import sal.service.home.models.objects.Loan;
-import sal.service.home.models.response.ResponseInquiryRefinance;
+import sal.service.home.models.response.ResponseInquiryRefinanceModel;
 
 /**
  *
@@ -24,11 +24,11 @@ public class CashOutLoan extends Loan {
         this.downPayment = downPayment;
     }
 
-    public ResponseInquiryRefinance calculate() {
+    public ResponseInquiryRefinanceModel calculate() {
         double amountBorrowed = this.loanAmount - amountPaidOff;
         double interest = amountBorrowed * (this.loanTermInMonths / 12) * interestRate;
         double monthlyPayment = (amountBorrowed + interest) / (this.loanTermInMonths);
-        ResponseInquiryRefinance response = new ResponseInquiryRefinance(amountBorrowed, interest, monthlyPayment);
+        ResponseInquiryRefinanceModel response = new ResponseInquiryRefinanceModel(amountBorrowed, interest, monthlyPayment);
 
         return response;
     }

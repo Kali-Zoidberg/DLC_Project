@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class IndexController {
 	@RequestMapping(method = RequestMethod.GET, value = "/")
 	public String indexPage() {
-		return "/templates/index.html";
+		return "/templates/index_react.html";
 	}
 }

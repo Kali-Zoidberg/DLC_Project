@@ -2,7 +2,7 @@ package sal.service.home.models.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ResponseInquiryRefinance {
+public class ResponseInquiryRefinanceModel extends ResponseModel {
     @JsonProperty("principal")
     private double principal;
     @JsonProperty("interest")
@@ -16,7 +16,8 @@ public class ResponseInquiryRefinance {
      * @param interest
      * @param monthlyPayment
      */
-    public ResponseInquiryRefinance(double principal, double interest, double monthlyPayment) {
+    public ResponseInquiryRefinanceModel(double principal, double interest, double monthlyPayment) {
+        super(0, "All is well.");
         this.principal = principal;
         this.interest = interest;
         this.monthlyPayment = monthlyPayment;

@@ -5,11 +5,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import sal.service.home.Greeting;
-import sal.service.home.models.request.RequestInquiryRefinance;
-import sal.service.home.models.response.ResponseInquiryRefinance;
-
-import javax.xml.ws.Response;
+import sal.service.home.models.objects.Greeting;
 
 @RestController
 public class GreetingController {

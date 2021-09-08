@@ -1,7 +1,9 @@
+import InquiryFormComponent from "./components/InquiryFormComponent";
+
 const React = require('react');
 const ReactDOM = require('react-dom');
 import TestComponent from './components/TestComponent.js';
-
+import * as ALL from './components';
 
 class App extends React.Component {
     constructor(props) {
@@ -24,7 +26,10 @@ class App extends React.Component {
         return (
             <React.Fragment>
             Time server recieved request: <TestComponent content = {this.state.content}></TestComponent>
+                asdf
+            <InquiryFormComponent />
             </React.Fragment>
+
 
         );
     }
