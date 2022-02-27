@@ -9,7 +9,7 @@
     <relativePath/>  
     <!-- lookup parent from repository --> 
   </parent>  
-  <groupId>sal.service.home</groupId>  
+  <groupId>dlc.service.home</groupId>
   <artifactId>rest-service-initial</artifactId>  
   <version>0.0.1</version>  
   <name>rest-service-initial</name>  

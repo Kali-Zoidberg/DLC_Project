@@ -1,7 +1,7 @@
 {
   "name": "spring-data-rest-and-reactjs",
   "version": "0.1.0",
-  "description": "SAL React test",
+  "description": "DLC React Test",
   "repository": {
     "type": "git",
     "url": "git@github.com:spring-guides/tut-react-and-spring-data-rest.git"
@@ -13,7 +13,7 @@
     "data",
     "react"
   ],
-  "author": "Greg L. Turnquist",
+  "author": "Nicholas Chow",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/spring-guides/tut-react-and-spring-data-rest/issues"

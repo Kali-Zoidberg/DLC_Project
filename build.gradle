@@ -9,12 +9,12 @@ plugins {
 
 azurefunctions {
 	resourceGroup='Developers'
-	appName='nickc-sal-dev'
+	appName='dlcSisterHood'
 	appSettings {
 		WEBSITE_RUN_FROM_PACKAGE = '1'
 		FUNCTIONS_EXTENSION_VERSION = '~2'
 		FUNCTIONS_WORKER_RUNTIME = 'java'
-		MAIN_CLASS = 'sal.service.home.core.RestServiceApplication'
+		MAIN_CLASS = 'dlc.service.home.core.RestServiceApplication'
 	}
 	authentication {
 		type = 'azure_cli'
@@ -25,10 +25,10 @@ azurefunctions {
 localDebug = "transport=dt_socket,server=y,suspend=n,address=5005"
 }
 
-group = 'sal.service.home'
+group = 'dlc.service.home'
 version = '0.0.1'
 sourceCompatibility = '1.8'
-mainClassName = 'sal.service.home.core.RestServiceApplication'
+mainClassName = 'dlc.service.home.core.RestServiceApplication'
 
 repositories {
 	mavenCentral()
@@ -46,5 +46,5 @@ test {
 }
 
 application {
-	mainClass = 'sal.service.home.core.RestServiceApplication'
+	mainClass = 'dlc.service.home.core.RestServiceApplication'
 }
