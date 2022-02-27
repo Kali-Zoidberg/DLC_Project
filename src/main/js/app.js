@@ -1,5 +1,4 @@
-import InquiryFormComponent from "./components/InquiryFormComponent";
-import TestComponent from "./components/TestComponent";
+import JeopardySquareComp from "./components/JeopardySquareComp";
 
 const React = require('react');
 const ReactDOM = require('react-dom');
@@ -20,11 +19,21 @@ class App extends React.Component {
                 this.setState({content: data.content})
         });
     }
+    retrieveJeopardySquares() {
+        let jeopardySquares = [];
+
+        return jeopardySquares;
+    }
 
     render() {
+        //Get JeopardySquares from backend
+
+        //Construct jeopardysquares
         return (
             <React.Fragment>
-                <InquiryFormComponent />
+                <JeopardySquareComp jeopardySquareID ={999}
+                                    description={"Hello World."}
+                                    points={9001}/>
             </React.Fragment>
 
 

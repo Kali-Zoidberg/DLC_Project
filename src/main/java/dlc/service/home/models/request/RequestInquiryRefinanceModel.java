@@ -2,17 +2,15 @@ package dlc.service.home.models.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Entity;
+
+@Entity
 public class RequestInquiryRefinanceModel extends RequestModel {
 
-    @JsonProperty("loanType")
     private String loanType;
-    @JsonProperty("loanTerm")
     private double loanTerm;
-    @JsonProperty("loanAmount")
     private double loanAmount;
-    @JsonProperty("interestRate")
     private double interestRate;
-    @JsonProperty("downPayment")
     private double downPayment;
 
 

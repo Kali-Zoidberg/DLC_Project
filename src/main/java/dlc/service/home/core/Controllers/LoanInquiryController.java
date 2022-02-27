@@ -15,6 +15,7 @@ public class LoanInquiryController {
         //Validate request Model
         //Make sure loanTerm is not < 0
         Loan loan = null;
+        System.out.println(requestModel);
         if (requestModel.getLoanType().equals("cash_out")) {
             loan = new CashOutLoan(requestModel.getLoanTerm(), requestModel.getLoanAmount(), requestModel.getInterestRate(),  requestModel.getDownPayment(), 10);
         }

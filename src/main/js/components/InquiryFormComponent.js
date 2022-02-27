@@ -8,10 +8,13 @@ class InquiryFormComponent extends React.Component {
             loanAmount : 150000,
             interestRate: 0.034,
             downPayment: 30000,
-            path: 'localhost:8080'
+            path: 'http://localhost:8080'
 
         }
+
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
+
     handleInputChange(event) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -21,21 +24,29 @@ class InquiryFormComponent extends React.Component {
             [name]: value
         });
     }
+
     handleSubmit(e) {
         e.preventDefault();
+        console.log(this);
         const requestOptions = {
             method : 'POST',
             headers : { 'Content-Type' : 'application/json'},
 
-            body : {
-                'loanAmount' : this.state.loanAmount,
-                'loanTerm' : this.state.loanTerm,
-                'interestRate': this.state.interestRate,
+            body : JSON.stringify({
+                loanAmount : this.state.loanAmount,
+                loanTerm : this.state.loanTerm,
+                interestRate: this.state.interestRate,
+                loanType : this.state.loanType.value
 
-            },
+            }),
         };
+
         fetch(this.state.path + '/inquiryRefinance', requestOptions).then(
-            response => response.json()
+            response => {
+                console.log(response);
+                response.json()
+
+            }
         ).then(data => console.log(data));
 
         //make POST
