@@ -8,8 +8,13 @@
 
 }
 .jeopardySquare > .row {
-    width: 30%;
-    height: 100%;
+
     background-color: royalblue;
     color: white;
+}
+
+.jeopardyRow {
+    /*height:100vm; width:100vm; !* IE9 fallback *!*/
+    /*width: 100vmin; height: 100vmin;*/
+    margin-bottom: 5%;
 }

@@ -1,4 +1,5 @@
 import JeopardySquareComp from "./components/JeopardySquareComp";
+import JeopardyBoardComp from "./components/JeopardyBoardComp";
 
 const React = require('react');
 const ReactDOM = require('react-dom');
@@ -27,16 +28,48 @@ class App extends React.Component {
 
     render() {
         //Get JeopardySquares from backend
+        const jeopardySquares = [
+        <JeopardySquareComp jeopardySquareID ={999}
+                            description={"Hello World."}
+                            points={9001}/>,
+
+            <JeopardySquareComp jeopardySquareID ={999}
+                                description={"Hello World."}
+                                points={23}/>,
+            <JeopardySquareComp jeopardySquareID ={999}
+                                description={"Hello World."}
+                                points={43}/>,
+
+            <JeopardySquareComp jeopardySquareID ={999}
+                                description={"Hello World."}
+                                points={4324}/>,
+            <JeopardySquareComp jeopardySquareID ={999}
+                                description={"Hello World."}
+                                points={545}/>,
+
+            <JeopardySquareComp jeopardySquareID ={999}
+                                description={"Hello asdfasdfWorld."}
+                                points={34}/>,
+            <JeopardySquareComp jeopardySquareID ={999}
+                                description={"Hello World."}
+                                points={55}/>,
+
+            <JeopardySquareComp jeopardySquareID ={999}
+                                description={"Hellodasfas World."}
+                                points={33}/>
+        ];
 
         //Construct jeopardysquares
         return (
             <React.Fragment>
-                <JeopardySquareComp jeopardySquareID ={999}
-                                    description={"Hello World."}
-                                    points={9001}/>
+                <div class="row">
+                    <div class="col-4">
+                    </div>
+                    <div className="col-4">
+                        <JeopardyBoardComp jeopardySquares={jeopardySquares} squaresPerRow={4}/>
+                    </div>
+                </div>
             </React.Fragment>
-
-
         );
     }
 }

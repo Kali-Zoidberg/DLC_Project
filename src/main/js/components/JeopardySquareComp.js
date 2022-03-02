@@ -1,6 +1,10 @@
 import React from 'react';
 import Globals from "../globals/Globals.js"
 class JeopardySquareComp extends React.Component {
+    /**
+     *
+     * @param props
+     */
     constructor(props) {
         super(props);
 
@@ -64,9 +68,7 @@ class JeopardySquareComp extends React.Component {
             <div className="container-fluid jeopardySquare" onClick={this.flipJeopardySquare}>
                 <div className="row">
                     <label className="text">
-                        <h1>
                             {this.state.text}
-                        </h1>
                     </label>
                 </div>
             </div>);
