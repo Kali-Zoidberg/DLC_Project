@@ -65,12 +65,10 @@ class JeopardySquareComp extends React.Component {
 
     render() {
         return (
-            <div className="container-fluid jeopardySquare" onClick={this.flipJeopardySquare}>
-                <div className="row">
-                    <label className="text">
-                            {this.state.text}
-                    </label>
-                </div>
+            <div className="row jeopardySquare" onClick={this.flipJeopardySquare}>
+                <label className="jeopardyText">
+                        {this.state.text}
+                </label>
             </div>);
     }
 }
