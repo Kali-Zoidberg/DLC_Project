@@ -8,15 +8,16 @@ import * as d3 from 'd3';
 class BarChartRaceComp extends React.Component {
     constructor(props) {
         super(props);
+        const _this = this;
         this.width = 1000;
         this.myRef = React.createRef();
         this.data = data;
         this.names = names;
         this.n=12;
         this.k=10;
-        this.duration = 15;
+        this.duration = 30;
         this.keyframes = keyframes;
-        console.log(this.data);
+        console.log(this.keyframes);
         this.datevalues = Array.from(d3.rollup(this.data, ([d]) => d.value, d => +d.date, d => d.name))
             .map(([date, data]) => [new Date(date), data])
             .sort(([a], [b]) => d3.ascending(a, b));
@@ -100,6 +101,7 @@ class BarChartRaceComp extends React.Component {
     }
 
     bars(svg) {
+
         let bar = svg.append("g")
             .attr("fill-opacity", 0.6)
             .selectAll("rect");
@@ -108,7 +110,7 @@ class BarChartRaceComp extends React.Component {
             .data(data.slice(0, this.n), d => d.name)
             .join(
                 enter => enter.append("rect")
-                    .attr("fill", this.color)
+                    .attr("fill", this.color(this.data))
                     .attr("height", this.y.bandwidth())
                     .attr("x", this.x(0))
                     .attr("y", d => this.y((this.prev.get(d) || d).rank))
@@ -186,7 +188,7 @@ class BarChartRaceComp extends React.Component {
         };
     }
 
-    color() {
+    color(data) {
         const scale = d3.scaleOrdinal(d3.schemeTableau10);
         if (data.some(d => d.category !== undefined)) {
             const categoryByName = new Map(data.map(d => [d.name, d.category]))
@@ -197,12 +199,12 @@ class BarChartRaceComp extends React.Component {
     }
 
 
-    formatDate() {
+    formatDate(val) {
 
-        return d3.utcFormat("%Y")
+        return d3.timeFormat('%Y')(new Date(val));
     }
-    formatNumber() {
-        return d3.format(",d");
+    formatNumber(val) {
+        return d3.format(",d")(val);
     }
 
     textTween(a, b) {
