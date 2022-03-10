@@ -30,7 +30,7 @@ class BarChartRaceComp extends React.Component {
     rank(value) {
         const data = Array.from(this.names, name => ({name, value: value(name)}));
         data.sort((a, b) => d3.descending(a.value, b.value));
-        for (let i = 0; i < data.length; ++i) data[i].rank = Math.min(n, i);
+        for (let i = 0; i < data.length; ++i) data[i].rank = Math.min(this.n, i);
         return data;
     }
 
@@ -38,8 +38,8 @@ class BarChartRaceComp extends React.Component {
         const keyframes = [];
         let ka, a, kb, b;
         for ([[ka, a], [kb, b]] of d3.pairs(this.datevalues)) {
-            for (let i = 0; i < k; ++i) {
-                const t = i / k;
+            for (let i = 0; i < this.k; ++i) {
+                const t = i / this.k;
                 keyframes.push([
                     new Date(ka * (1 - t) + kb * t),
                     rank(name => (a.get(name) || 0) * (1 - t) + (b.get(name) || 0) * t)
@@ -88,22 +88,22 @@ class BarChartRaceComp extends React.Component {
             .selectAll("rect");
 
         return ([date, data], transition) => bar = bar
-            .data(data.slice(0, n), d => d.name)
+            .data(data.slice(0, this.n), d => d.name)
             .join(
                 enter => enter.append("rect")
-                    .attr("fill", color)
-                    .attr("height", y.bandwidth())
-                    .attr("x", x(0))
-                    .attr("y", d => y((prev.get(d) || d).rank))
-                    .attr("width", d => x((prev.get(d) || d).value) - x(0)),
+                    .attr("fill", this.color)
+                    .attr("height", this.y.bandwidth())
+                    .attr("x", this.x(0))
+                    .attr("y", d => this.y((this.prev.get(d) || d).rank))
+                    .attr("width", d => this.x((this.prev.get(d) || d).value) - this.x(0)),
                 update => update,
                 exit => exit.transition(transition).remove()
-                    .attr("y", d => y((next.get(d) || d).rank))
-                    .attr("width", d => x((next.get(d) || d).value) - x(0))
+                    .attr("y", d => this.y((this.next.get(d) || d).rank))
+                    .attr("width", d => this.x((this.next.get(d) || d).value) - this.x(0))
             )
             .call(bar => bar.transition(transition)
-                .attr("y", d => y(d.rank))
-                .attr("width", d => x(d.value) - x(0)));
+                .attr("y", d => this.y(d.rank))
+                .attr("width", d => this.x(d.value) - this.x(0)));
     }
 
     labels(svg) {
@@ -117,8 +117,8 @@ class BarChartRaceComp extends React.Component {
             .data(data.slice(0, n), d => d.name)
             .join(
                 enter => enter.append("text")
-                    .attr("transform", d => `translate(${x((prev.get(d) || d).value)},${y((prev.get(d) || d).rank)})`)
-                    .attr("y", y.bandwidth() / 2)
+                    .attr("transform", d => `translate(${this.x((this.prev.get(d) || d).value)},${this.y((this.prev.get(d) || d).rank)})`)
+                    .attr("y", this.y.bandwidth() / 2)
                     .attr("x", -6)
                     .attr("dy", "-0.25em")
                     .text(d => d.name)
@@ -129,22 +129,22 @@ class BarChartRaceComp extends React.Component {
                         .attr("dy", "1.15em")),
                 update => update,
                 exit => exit.transition(transition).remove()
-                    .attr("transform", d => `translate(${x((next.get(d) || d).value)},${y((next.get(d) || d).rank)})`)
-                    .call(g => g.select("tspan").tween("text", d => textTween(d.value, (next.get(d) || d).value)))
+                    .attr("transform", d => `translate(${this.x((this.next.get(d) || d).value)},${this.y((this.next.get(d) || d).rank)})`)
+                    .call(g => g.select("tspan").tween("text", d => this.textTween(d.value, (this.next.get(d) || d).value)))
             )
             .call(bar => bar.transition(transition)
-                .attr("transform", d => `translate(${x(d.value)},${y(d.rank)})`)
-                .call(g => g.select("tspan").tween("text", d => textTween((prev.get(d) || d).value, d.value))))
+                .attr("transform", d => `translate(${this.x(d.value)},${this.y(d.rank)})`)
+                .call(g => g.select("tspan").tween("text", d => this.textTween((this.prev.get(d) || d).value, d.value))));
     }
 
     axis(svg) {
         const g = svg.append("g")
-            .attr("transform", `translate(0,${margin.top})`);
+            .attr("transform", `translate(0,${this.margin.top})`);
 
         const axis = d3.axisTop(x)
             .ticks(width / 160)
             .tickSizeOuter(0)
-            .tickSizeInner(-barSize * (n + y.padding()));
+            .tickSizeInner(-this.barSize * (this.n + this.y.padding()));
 
         return (_, transition) => {
             g.transition(transition).call(axis);
@@ -155,17 +155,18 @@ class BarChartRaceComp extends React.Component {
     }
 
     ticker(svg) {
+        const _this = this;
         const now = svg.append("text")
-            .style("font", `bold ${barSize}px var(--sans-serif)`)
+            .style("font", `bold ${this.barSize}px var(--sans-serif)`)
             .style("font-variant-numeric", "tabular-nums")
             .attr("text-anchor", "end")
-            .attr("x", width - 6)
-            .attr("y", margin.top + barSize * (n - 0.45))
+            .attr("x", this.width - 6)
+            .attr("y", this.margin.top + this.barSize * (this.n - 0.45))
             .attr("dy", "0.32em")
-            .text(formatDate(keyframes[0][0]));
+            .text(_this.formatDate(_this.keyframes[0][0]));
 
         return ([date], transition) => {
-            transition.end().then(() => now.text(formatDate(date)));
+            transition.end().then(() => now.text(_this.formatDate(date)));
         };
     }
 
@@ -180,7 +181,10 @@ class BarChartRaceComp extends React.Component {
     }
 
 
+    formatDate() {
 
+        return d3.utcFormat("%Y")
+    }
     formatNumber() {
         return d3.format(",d");
     }
