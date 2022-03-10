@@ -5,16 +5,28 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-
+    min-width: 15vw;
+    max-width: 15vw;
+    min-height: 20vh;
+    max-height: 20vh;
+    background-color: #4871b3;
 }
-.jeopardySquare > .row {
 
-    background-color: royalblue;
+.jeopardyText {
+    font-size: 0.8rem;
     color: white;
+    text-align: center;
+    transform: translate(0%, 25%);
 }
 
 .jeopardyRow {
     /*height:100vm; width:100vm; !* IE9 fallback *!*/
     /*width: 100vmin; height: 100vmin;*/
     margin-bottom: 5%;
+}
+
+.gutter {
+    background-color: #4871b3;
+    min-height: 100vh;
+    overflow: visible;
 }
