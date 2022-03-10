@@ -1,7 +1,7 @@
 var path = require('path');
 
 module.exports = {
-    entry: './src/main/js/app.js',
+    entry: ['regenerator-runtime/runtime.js', './src/main/js/app.js'],
     devtool: 'source-map',
     cache: true,
     mode: 'development',
@@ -20,7 +20,8 @@ module.exports = {
                         presets: ["@babel/preset-env", "@babel/preset-react"]
                     }
                 }]
-            }
+            },
+            { test: /\.json$/, loader: 'json-loader' },
         ]
     }
 };
