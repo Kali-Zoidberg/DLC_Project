@@ -1,6 +1,7 @@
 import JeopardySquareComp from "./components/JeopardySquareComp";
 import JeopardyBoardComp from "./components/JeopardyBoardComp";
 import BarChartComp from "./components/charts/BarChartComp";
+import BarChartRaceComp from "./components/charts/BarChartRaceComp";
 const React = require('react');
 const ReactDOM = require('react-dom');
 
@@ -67,7 +68,7 @@ class App extends React.Component {
                     </div>
                     <div className="col-8 content-centered">
                         <JeopardyBoardComp jeopardySquares={jeopardySquares} squaresPerRow={4}/>
-                        <BarChartComp/>
+                        <BarChartRaceComp/>
 
                     </div>
                     <div className="col-2 gutter" id="gutter-right">
