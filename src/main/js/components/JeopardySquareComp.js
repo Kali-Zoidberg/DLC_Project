@@ -13,6 +13,7 @@ class JeopardySquareComp extends React.Component {
         props.points
         props.description
          */
+
         this.state = {
             orientation: 0, //degrees
             text: props.description
@@ -25,7 +26,6 @@ class JeopardySquareComp extends React.Component {
      * Handles input event when the square is clicked.
      */
     flipJeopardySquare() {
-        console.log("HI MOM");
         this.flipOrientation();
 
         //Change to the other side of the board.

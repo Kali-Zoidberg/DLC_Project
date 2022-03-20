@@ -8,11 +8,15 @@ const ReactDOM = require('react-dom');
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {content: []};
+        this.state = {
+            content: [],
+            jeopardySquares : []
+        };
+
+        this.path = 'localhost:8080';
     }
 
     componentDidMount() {
-
         fetch('/greeting?name=helloworld',
             {
                 method: 'GET',
@@ -20,55 +24,56 @@ class App extends React.Component {
             }).then(response => response.json()).then( data =>{
                 this.setState({content: data.content})
         });
+        this.retrieveJeopardySquares();
     }
+
     retrieveJeopardySquares() {
         let jeopardySquares = [];
+        //Add database call here
+        // GET request using fetch with error handling
+        fetch('/getAllBoardSquares',
+            {
+                method: 'GET',
+                'Content-Type': 'application/json'
+            }).then(async response => {
+                const data = await response.json();
 
+                // check for error response
+                if (!response.ok) {
+                    // get error message from body or default to response statusText
+                    const error = 'Todo update error statement.';//(data && data.message) || response.statusText;
+                    return Promise.reject(error);
+                }
+                let jeopardySquares = [];
+                console.log(data);
+                for (const boardSquare of Object.values(data.boardSquares)) {
+                    jeopardySquares.push(<JeopardySquareComp jeopardyID={boardSquare.squareId}
+                                                             description={boardSquare.squareDescriptionFull}
+                                                             points={boardSquare.points}
+                                                             key={boardSquare.squareId}
+                    />);
+                }
+                this.setState({ jeopardySquares: jeopardySquares })
+            })
+            .catch(error => {
+                this.setState({ errorMessage: error.toString() });
+                console.error('There was an error!', error);
+            });
         return jeopardySquares;
     }
 
     render() {
         //Get JeopardySquares from backend
-        const jeopardySquares = [
-        <JeopardySquareComp jeopardySquareID ={999}
-                            description={"Hello World."}
-                            points={9001}/>,
-
-            <JeopardySquareComp jeopardySquareID ={999}
-                                description={"Hello World."}
-                                points={23}/>,
-            <JeopardySquareComp jeopardySquareID ={999}
-                                description={"Hello World."}
-                                points={43}/>,
-
-            <JeopardySquareComp jeopardySquareID ={999}
-                                description={"Hello World."}
-                                points={4324}/>,
-            <JeopardySquareComp jeopardySquareID ={999}
-                                description={"Hello World."}
-                                points={545}/>,
-
-            <JeopardySquareComp jeopardySquareID ={999}
-                                description={"Hello asdfasdfWorld."}
-                                points={34}/>,
-            <JeopardySquareComp jeopardySquareID ={999}
-                                description={"Hello World."}
-                                points={55}/>,
-
-            <JeopardySquareComp jeopardySquareID ={999}
-                                description={"Hellodasfas World."}
-                                points={33}/>
-        ];
-
         //Construct jeopardysquares
+        console.log(this.state.jeopardySquares);
         return (
             <React.Fragment>
                 <div className="row">
                     <div className="col-2 gutter" id="gutter-left">
                     </div>
                     <div className="col-8 content-centered">
-                        <JeopardyBoardComp jeopardySquares={jeopardySquares} squaresPerRow={4}/>
-                        <BarChartRaceComp/>
+                        <JeopardyBoardComp jeopardySquares={this.state.jeopardySquares} squaresPerRow={4}/>
+                        {/*<BarChartRaceComp/>*/}
 
                     </div>
                     <div className="col-2 gutter" id="gutter-right">
