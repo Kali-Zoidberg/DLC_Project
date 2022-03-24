@@ -90,7 +90,8 @@ class BarChartRaceComp extends React.Component {
         console.log("hello world");
         console.log(this.width);
         console.log(this.height);
-        const svg = d3.select(this.myRef.current).append("svg")
+        const svg =
+            d3.select(this.myRef.current).append("svg")
             .attr("viewBox", [0, 0, this.width, this.height])
             .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
 
@@ -191,7 +192,7 @@ class BarChartRaceComp extends React.Component {
     color(data) {
         const scale = d3.scaleOrdinal(d3.schemeTableau10);
         if (data.some(d => d.category !== undefined)) {
-            const categoryByName = new Map(data.map(d => [d.name, d.category]))
+            const categoryByName = new Map(data.map(d => [d.name, d.category]));
             scale.domain(Array.from(categoryByName.values()));
             return d => scale(categoryByName.get(d.name));
         }

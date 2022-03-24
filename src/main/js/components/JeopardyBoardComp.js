@@ -25,17 +25,16 @@ class JeopardyBoardComp extends React.Component {
 
         //Return empty board if there are no defined jeopardy squares.
         if (this.props.jeopardySquares.length === undefined || this.props.jeopardySquares.length < 1)
-            return (
-                <div className="container-fluid jeopardyBoard" onClick={this.flipJeopardySquare}>
-                </div>
-            );
+            return('');
 
         let row = [];
+        let collect_of_rows = [];
         let index = 0;
         for (const jeopardySquare of this.props.jeopardySquares) {
             ++index;
             if (counter < this.props.squaresPerRow) {
                 row.push(jeopardySquare);
+                collect_of_rows.push(jeopardySquare);
                 ++counter;
             }
             else {
@@ -47,6 +46,7 @@ class JeopardyBoardComp extends React.Component {
         if (row.length > 0)
             rows.push(<JeopardyBoardRow key={index} jeopardySquares={row} squaresPerRow={this.props.squaresPerRow}/>);
 
+        console.log(collect_of_rows);
         return (
             <div className="container-fluid jeopardyBoard" onClick={this.flipJeopardySquare}>
                 {rows}

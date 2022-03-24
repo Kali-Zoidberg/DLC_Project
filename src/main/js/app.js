@@ -17,13 +17,6 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        fetch('/greeting?name=helloworld',
-            {
-                method: 'GET',
-                headers: {'content-type': 'application/json'}
-            }).then(response => response.json()).then( data =>{
-                this.setState({content: data.content})
-        });
         this.retrieveJeopardySquares();
     }
 
@@ -65,7 +58,7 @@ class App extends React.Component {
     render() {
         //Get JeopardySquares from backend
         //Construct jeopardysquares
-        console.log(this.state.jeopardySquares);
+
         return (
             <React.Fragment>
                 <div className="row">
@@ -73,7 +66,7 @@ class App extends React.Component {
                     </div>
                     <div className="col-8 content-centered">
                         <JeopardyBoardComp jeopardySquares={this.state.jeopardySquares} squaresPerRow={4}/>
-                        {/*<BarChartRaceComp/>*/}
+                        <BarChartRaceComp/>
 
                     </div>
                     <div className="col-2 gutter" id="gutter-right">

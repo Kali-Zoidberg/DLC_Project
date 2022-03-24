@@ -16,7 +16,7 @@ class JeopardySquareComp extends React.Component {
 
         this.state = {
             orientation: 0, //degrees
-            text: props.description
+            text: props.points
         };
 
         this.flipJeopardySquare = this.flipJeopardySquare.bind(this);
@@ -34,11 +34,11 @@ class JeopardySquareComp extends React.Component {
         //Change content.
         if (this.state.orientation >= 180)
             this.setState({
-                    text: this.props.points
+                    text: this.props.description
             });
         else
             this.setState( {
-                text: this.props.description
+                text: this.props.points
             });
     }
 
@@ -69,7 +69,8 @@ class JeopardySquareComp extends React.Component {
                 <label className="jeopardyText">
                         {this.state.text}
                 </label>
-            </div>);
+            </div>
+        );
     }
 }
 
