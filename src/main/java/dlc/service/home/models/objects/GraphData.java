@@ -1,16 +1,16 @@
 package dlc.service.home.models.objects;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class GraphData<T> {
     private T value;
     private String name;
-    private Date timestamp;
+    private Date date;
 
-    public GraphData(T value, String name, Date timestamp) {
+    public GraphData(T value, String name, Date date) {
         this.value = value;
         this.name = name;
-        this.timestamp = timestamp;
+        this.date = date;
     }
 
     public void setValue(T value) {
@@ -21,19 +21,19 @@ public class GraphData<T> {
         this.name = name;
     }
 
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public T getValue() {
         return value;
     }
-
+-
     public String getName() {
         return name;
     }
 
-    public Date getTimestamp() {
-        return timestamp;
+    public Date getDate() {
+        return date;
     }
 }

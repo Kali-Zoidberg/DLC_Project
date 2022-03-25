@@ -1,8 +1,7 @@
 package dlc.service.home.core.Core;
 
-import dlc.service.home.models.objects.BoardSquare;
 import dlc.service.home.models.objects.GraphData;
-import dlc.service.home.models.objects.Person;
+import dlc.service.home.models.objects.GraphDataEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -20,17 +19,17 @@ public class GraphDataCore {
      */
     public List<GraphData> generateGraphData(Date startDate, Date endDate) {
 
-        String sql = "SELECT * FROM dlc_db.graph_data" +
-                "WHERE timestamp >= ? AND timestamp <= ?;";
+        String sql = "SELECT * FROM dlc_db.graph_data LEFT JOIN dlc_db.persons ON graph_data.person_id = persons.person_id";
 
-        List<GraphData> graphData =
-                jdbcTemplate.query(sql, (rs, rowNum) ->);
-        //How do we do data points for each day?
-        //Num of days
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(startDate);
+        List<GraphData> graphDataEntities =
+                jdbcTemplate.query(sql, (rs, rowNum) -> (new GraphData(
+                        rs.getInt("total_points"),
+                        rs.getString("first_name") + rs.getString("last_name"),
+                        rs.getDate("timestamp")
+                )), startDate, endDate);
 
-        return null;
+
+        return graphDataEntities;
     }
 
     public List<String> getAllNames() {

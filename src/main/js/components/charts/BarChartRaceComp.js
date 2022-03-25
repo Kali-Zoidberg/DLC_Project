@@ -1,6 +1,3 @@
-import data from '../resources/data.js';
-import names from '../resources/names.js';
-import keyframes from '../resources/keyframes.js';
 import 'regenerator-runtime/runtime';
 import React from 'react';
 import * as d3 from 'd3';
@@ -8,43 +5,50 @@ import * as d3 from 'd3';
 class BarChartRaceComp extends React.Component {
     constructor(props) {
         super(props);
-        const _this = this;
+        this.data = props.data;
+        //this.names = props.names;
+        this.names = new Set(this.data.map(d => d.name));
+
         this.width = 1000;
-        this.myRef = React.createRef();
-        this.data = data;
-        this.names = names;
-        this.n=12;
-        this.k=10;
+        this.n=3;
+        this.k=3;
         this.duration = 30;
-        this.keyframes = keyframes;
-        console.log(this.keyframes);
-        this.datevalues = Array.from(d3.rollup(this.data, ([d]) => d.value, d => +d.date, d => d.name))
+        d3.group(this.data, d => d.name)
+        this.datevalues = Array.from(d3.rollup(this.data, ([d]) => d.value, d => (new Date(d.date)), d => d.name))
             .map(([date, data]) => [new Date(date), data])
             .sort(([a], [b]) => d3.ascending(a, b));
-        console.log(this.datevalues);
+        this.keyframes = this.some_keyframes();
+
         this.nameframes = d3.groups(this.keyframes.flatMap(([, data]) => data), d => d.name);
         this.prev = new Map(this.nameframes.flatMap(([, data]) => d3.pairs(data, (a, b) => [b, a])));
         this.next = new Map(this.nameframes.flatMap(([, data]) => d3.pairs(data)));
-        console.log(this.nameframes);
+        // console.log(this.prev);
+        // console.log(this.next);
         this.barSize = 48;
         this.margin = ({top: 16, right: 6, bottom: 6, left: 0});
         this.height = this.margin.top + this.barSize * this.n + this.margin.bottom;
-        this.x = d3.scaleLinear([0, 1], [this.margin.left, this.width - this.margin.right])
+        this.x = d3.scaleLinear([0, 1], [this.margin.left, this.width - this.margin.right]);
         this.y = d3.scaleBand()
             .domain(d3.range(this.n + 1))
             .rangeRound([this.margin.top, this.margin.top + this.barSize * (this.n + 1 + 0.1)])
             .padding(0.1);
+
+        this.myRef = React.createRef();
+
     }
 
     rank(value) {
         const data = Array.from(this.names, name => ({name, value: value(name)}));
+        console.log("NIck look here for the data.");
+        console.log(data);
         data.sort((a, b) => d3.descending(a.value, b.value));
         for (let i = 0; i < data.length; ++i) data[i].rank = Math.min(this.n, i);
         return data;
     }
 
-    keyframes() {
+    some_keyframes() {
         const keyframes = [];
+
         let ka, a, kb, b;
         for ([[ka, a], [kb, b]] of d3.pairs(this.datevalues)) {
             for (let i = 0; i < this.k; ++i) {
@@ -87,9 +91,6 @@ class BarChartRaceComp extends React.Component {
 
     chart() {
 
-        console.log("hello world");
-        console.log(this.width);
-        console.log(this.height);
         const svg =
             d3.select(this.myRef.current).append("svg")
             .attr("viewBox", [0, 0, this.width, this.height])
@@ -191,11 +192,11 @@ class BarChartRaceComp extends React.Component {
 
     color(data) {
         const scale = d3.scaleOrdinal(d3.schemeTableau10);
-        if (data.some(d => d.category !== undefined)) {
-            const categoryByName = new Map(data.map(d => [d.name, d.category]));
-            scale.domain(Array.from(categoryByName.values()));
-            return d => scale(categoryByName.get(d.name));
-        }
+        // if (data.some(d => d.category !== undefined)) {
+        //     const categoryByName = new Map(data.map(d => [d.name, d.category]));
+        //     scale.domain(Array.from(categoryByName.values()));
+        //     return d => scale(categoryByName.get(d.name));
+        // }
         return d => scale(d.name);
     }
 
@@ -220,18 +221,16 @@ class BarChartRaceComp extends React.Component {
 
     componentDidMount() {
         let size = 500;
-        console.log("component mounted");
-
+        const chart = this.chart();
+        this.animateChart(chart);
         // d3.select(this.myRef.current)
         //     .append('p')
         //     .text("Hello World");
     }
 
     render() {
-        const chart = this.chart();
-        this.animateChart(chart);
+
         //Ideally, we want to return the chart without the svg and append it manually.
-        console.log("hi world");
         return (
             <div ref={this.myRef}>
             </div>

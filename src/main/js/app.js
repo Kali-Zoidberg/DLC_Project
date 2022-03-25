@@ -10,7 +10,8 @@ class App extends React.Component {
         super(props);
         this.state = {
             content: [],
-            jeopardySquares : []
+            jeopardySquares: undefined,
+            barChart: undefined
         };
 
         this.path = 'localhost:8080';
@@ -18,6 +19,8 @@ class App extends React.Component {
 
     componentDidMount() {
         this.retrieveJeopardySquares();
+        this.fetchRacingBarChart();
+
     }
 
     retrieveJeopardySquares() {
@@ -38,7 +41,6 @@ class App extends React.Component {
                     return Promise.reject(error);
                 }
                 let jeopardySquares = [];
-                console.log(data);
                 for (const boardSquare of Object.values(data.boardSquares)) {
                     jeopardySquares.push(<JeopardySquareComp jeopardyID={boardSquare.squareId}
                                                              description={boardSquare.squareDescriptionFull}
@@ -55,19 +57,50 @@ class App extends React.Component {
         return jeopardySquares;
     }
 
+    fetchRacingBarChart() {
+        //Add database call here
+        // GET request using fetch with error handling
+        fetch('/getRacingBarChart',{
+                method: 'GET',
+                'Content-Type': 'application/json'
+            }).then(async response => {
+            const data = await response.json();
+
+            // check for error response
+            if (!response.ok) {
+                // get error message from body or default to response statusText
+                const error = 'Todo update error statement.';//(data && data.message) || response.statusText;
+                return Promise.reject(error);
+            }
+
+
+            this.setState(
+                { barChart: {
+                        data : data.data,
+                        names : data.names
+                    }
+                });
+            }).catch(error => {
+                this.setState({ errorMessage: error.toString() });
+                console.error('There was an error!', error);
+            });
+    }
+
     render() {
+        if (this.state.barChart === undefined) {
+            return 'Loading....';
+        }
+        console.log(this.state.barChart);
         //Get JeopardySquares from backend
         //Construct jeopardysquares
-
         return (
             <React.Fragment>
                 <div className="row">
                     <div className="col-2 gutter" id="gutter-left">
                     </div>
                     <div className="col-8 content-centered">
-                        <JeopardyBoardComp jeopardySquares={this.state.jeopardySquares} squaresPerRow={4}/>
-                        <BarChartRaceComp/>
-
+                        <JeopardyBoardComp jeopardySquares={this.state.jeopardySquares} squaresPerRow={3}/>
+                        <BarChartRaceComp data={this.state.barChart.data} names={this.state.barChart.names}/>
                     </div>
                     <div className="col-2 gutter" id="gutter-right">
                     </div>
