@@ -9,24 +9,52 @@
     max-width: 15vw;
     min-height: 20vh;
     max-height: 20vh;
-    background-color: #4871b3;
+
+    background-image:url(../images/cloud_outline_filled.png);
+    background-position: 60% 50%;
+    background-color: #D1EEFE;
+    background-size: 95%;
+    overflow: hidden;
+    background-repeat: no-repeat;
 }
 
 .jeopardyText {
-    font-size: 0.8rem;
-    color: white;
+    font-size: 1rem;
+    color: black;
     text-align: center;
     transform: translate(0%, 25%);
+    font-family: Andale Mono, monospace ;
 }
 
+.jeopardyPoints {
+    padding-top: 10%;
+    font-size: 2rem;
+    color: black;
+    text-align: center;
+    transform: translate(0%, 25%);
+    font-weight: bolder;
+    font-family: Andale Mono, monospace ;
+}
+.site-header {
+    text-align: center;
+}
 .jeopardyRow {
     /*height:100vm; width:100vm; !* IE9 fallback *!*/
     /*width: 100vmin; height: 100vmin;*/
     margin-bottom: 5%;
 }
+.jeopardyBoard {
+    padding-top: 8%;
+}
+.page.odd {
+    background-color: white;
+}
+.content-centered {
+    background-color: #D1EEFE;
+}
 
 .gutter {
-    background-color: #4871b3;
+    background-color: #D1EEFE;
     min-height: 100vh;
     overflow: visible;
 }

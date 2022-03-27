@@ -30,24 +30,33 @@ class JeopardyBoardComp extends React.Component {
         let row = [];
         let collect_of_rows = [];
         let index = 0;
+
         for (const jeopardySquare of this.props.jeopardySquares) {
-            ++index;
-            if (counter < this.props.squaresPerRow) {
-                row.push(jeopardySquare);
-                collect_of_rows.push(jeopardySquare);
-                ++counter;
-            }
-            else {
-                counter = 0;
+            if (index % this.props.squaresPerRow === 0 && index !== 0) {
                 rows.push(<JeopardyBoardRow key={index} jeopardySquares={row} squaresPerRow={this.props.squaresPerRow}/>);
                 row = [];
             }
+
+            row.push(jeopardySquare);
+            ++index;
+
+            // if (counter < (this.props.squaresPerRow - 1)) {
+            //     row.push(jeopardySquare);
+            //     collect_of_rows.push(jeopardySquare);
+            //     ++counter;
+            // }
+            // else {
+            //     counter = 0;
+            //     rows.push(<JeopardyBoardRow key={index} jeopardySquares={row} squaresPerRow={this.props.squaresPerRow}/>);
+            //     collect_of_rows.push(jeopardySquare);
+            //
+            // }
         }
         if (row.length > 0)
             rows.push(<JeopardyBoardRow key={index} jeopardySquares={row} squaresPerRow={this.props.squaresPerRow}/>);
 
-        console.log(collect_of_rows);
-        debugger
+//debugger;
+
         return (
             <div className="container-fluid jeopardyBoard" onClick={this.flipJeopardySquare}>
                 {rows}

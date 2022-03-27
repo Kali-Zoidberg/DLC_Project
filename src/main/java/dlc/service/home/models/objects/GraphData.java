@@ -28,7 +28,7 @@ public class GraphData<T> {
     public T getValue() {
         return value;
     }
--
+
     public String getName() {
         return name;
     }

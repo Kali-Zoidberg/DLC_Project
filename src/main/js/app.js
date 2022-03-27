@@ -73,7 +73,7 @@ class App extends React.Component {
                 return Promise.reject(error);
             }
 
-
+            console.log(data);
             this.setState(
                 { barChart: {
                         data : data.data,
@@ -90,17 +90,26 @@ class App extends React.Component {
         if (this.state.barChart === undefined) {
             return 'Loading....';
         }
-        console.log(this.state.barChart);
+        // console.log(this.state.barChart);
         //Get JeopardySquares from backend
         //Construct jeopardysquares
         return (
             <React.Fragment>
+                <div className="row site-header">
+                    <h1>
+                    &Delta;&Lambda;&Chi; Sisterhood
+                    </h1>
+                </div>
                 <div className="row">
                     <div className="col-2 gutter" id="gutter-left">
                     </div>
                     <div className="col-8 content-centered">
-                        <JeopardyBoardComp jeopardySquares={this.state.jeopardySquares} squaresPerRow={3}/>
+                        <div className="page even">
+                            <JeopardyBoardComp jeopardySquares={this.state.jeopardySquares} squaresPerRow={3}/>
+                        </div>
+                        <div className="page odd">
                         <BarChartRaceComp data={this.state.barChart.data} names={this.state.barChart.names}/>
+                        </div>
                     </div>
                     <div className="col-2 gutter" id="gutter-right">
                     </div>

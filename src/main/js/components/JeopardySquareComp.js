@@ -16,6 +16,7 @@ class JeopardySquareComp extends React.Component {
 
         this.state = {
             orientation: 0, //degrees
+            cloudInnerClassName: 'jeopardyPoints',
             text: props.points
         };
 
@@ -34,11 +35,13 @@ class JeopardySquareComp extends React.Component {
         //Change content.
         if (this.state.orientation >= 180)
             this.setState({
-                    text: this.props.description
+                    text: this.props.description,
+                    cloudInnerClassName: 'jeopardyText'
             });
         else
             this.setState( {
-                text: this.props.points
+                text: this.props.points,
+                cloudInnerClassName: 'jeopardyPoints'
             });
     }
 
@@ -64,9 +67,10 @@ class JeopardySquareComp extends React.Component {
     }
 
     render() {
+
         return (
             <div className="row jeopardySquare" onClick={this.flipJeopardySquare}>
-                <label className="jeopardyText">
+                <label className={this.state.cloudInnerClassName}>
                         {this.state.text}
                 </label>
             </div>

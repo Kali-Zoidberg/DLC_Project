@@ -10,9 +10,9 @@ class BarChartRaceComp extends React.Component {
         this.names = new Set(this.data.map(d => d.name));
 
         this.width = 1000;
-        this.n=3;
-        this.k=3;
-        this.duration = 30;
+        this.n=28;
+        this.k=28;
+        this.duration = 60;
         d3.group(this.data, d => d.name)
         this.datevalues = Array.from(d3.rollup(this.data, ([d]) => d.value, d => (new Date(d.date)), d => d.name))
             .map(([date, data]) => [new Date(date), data])
@@ -203,7 +203,7 @@ class BarChartRaceComp extends React.Component {
 
     formatDate(val) {
 
-        return d3.timeFormat('%Y')(new Date(val));
+        return d3.timeFormat('%b %d')(new Date(val));
     }
     formatNumber(val) {
         return d3.format(",d")(val);
