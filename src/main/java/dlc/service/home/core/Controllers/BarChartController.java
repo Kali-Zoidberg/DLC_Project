@@ -41,7 +41,7 @@ public class BarChartController {
         List<GraphData<Integer>> graphDataEntities =
                 jdbcTemplate.query(sql, (rs, rowNum) -> (new GraphData<>(
                         rs.getInt("total_points"),
-                        rs.getString("first_name") + rs.getString("last_name"),
+                        rs.getString("first_name") + " " + rs.getString("last_name"),
                         rs.getDate("datetime_recorded")
                 )), startDate);
 

@@ -24,23 +24,21 @@ class BarChartRaceComp extends React.Component {
         this.next = new Map(this.nameframes.flatMap(([, data]) => d3.pairs(data)));
         // console.log(this.prev);
         // console.log(this.next);
-        this.barSize = 48;
+        this.barSize = 42;
         this.margin = ({top: 16, right: 6, bottom: 6, left: 0});
         this.height = this.margin.top + this.barSize * this.n + this.margin.bottom;
-        this.x = d3.scaleLinear([0, 1], [this.margin.left, this.width - this.margin.right]);
+        this.x = d3.scaleLinear([0, 1], [this.margin.left, this.width - this.margin.right * 2]);
         this.y = d3.scaleBand()
             .domain(d3.range(this.n + 1))
-            .rangeRound([this.margin.top, this.margin.top + this.barSize * (this.n + 1 + 0.1)])
+            .rangeRound([this.margin.top * 3, this.margin.top + this.barSize * (this.n + 1 + 0.1)])
             .padding(0.1);
 
         this.myRef = React.createRef();
-
     }
 
     rank(value) {
         const data = Array.from(this.names, name => ({name, value: value(name)}));
-        console.log("NIck look here for the data.");
-        console.log(data);
+
         data.sort((a, b) => d3.descending(a.value, b.value));
         for (let i = 0; i < data.length; ++i) data[i].rank = Math.min(this.n, i);
         return data;
@@ -108,6 +106,8 @@ class BarChartRaceComp extends React.Component {
             .attr("fill-opacity", 0.6)
             .selectAll("rect");
 
+
+        //When bar size = 0, what do we do?
         return ([date, data], transition) => bar = bar
             .data(data.slice(0, this.n), d => d.name)
             .join(
@@ -160,7 +160,7 @@ class BarChartRaceComp extends React.Component {
 
     axis(svg) {
         const g = svg.append("g")
-            .attr("transform", `translate(0,${this.margin.top})`);
+            .attr("transform", `translate(0,${this.margin.top * 3})`);
 
         const axis = d3.axisTop(this.x)
             .ticks(this.width / 160)
@@ -180,9 +180,10 @@ class BarChartRaceComp extends React.Component {
             .style("font", `bold ${this.barSize}px var(--sans-serif)`)
             .style("font-variant-numeric", "tabular-nums")
             .attr("text-anchor", "end")
-            .attr("x", this.width - 6)
-            .attr("y", this.margin.top + this.barSize * (this.n - 0.45))
-            .attr("dy", "0.32em")
+            .attr("x", (this.width / 2)) //Centered and room for month-day content
+            .attr("y", this.margin.top / 2)
+                //@Nick this is for bottom left//this.margin.top + this.barSize * (this.n - 0.45))
+            .attr("dy", "1em")
             .text(this.formatDate(this.keyframes[0][0]));
 
         return ([date], transition) => {

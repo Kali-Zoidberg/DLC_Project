@@ -70,9 +70,11 @@ class JeopardySquareComp extends React.Component {
 
         return (
             <div className="row jeopardySquare" onClick={this.flipJeopardySquare}>
-                <label className={this.state.cloudInnerClassName}>
-                        {this.state.text}
-                </label>
+                <div className="jeopardyContent">
+                    <label className={this.state.cloudInnerClassName}>
+                            {this.state.text}
+                    </label>
+                </div>
             </div>
         );
     }

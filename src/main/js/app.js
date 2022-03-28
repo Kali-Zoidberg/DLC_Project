@@ -97,7 +97,7 @@ class App extends React.Component {
             <React.Fragment>
                 <div className="row site-header">
                     <h1>
-                    &Delta;&Lambda;&Chi; Sisterhood
+                    Delta Lambda Chi - Sisterhood
                     </h1>
                 </div>
                 <div className="row">
