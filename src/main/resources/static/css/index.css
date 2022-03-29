@@ -23,7 +23,7 @@
     max-height: 20vh;
     background-image:url(../images/cloud_outline_filled.png);
     background-position: 60% 50%;
-    background-color: #B8E5FA;
+    background-color: #D1EEFE;
     background-size: 95%;
     overflow: hidden;
     background-repeat: no-repeat;
@@ -54,6 +54,7 @@
 
 }
 .site-header {
+    background-color: white;
     text-align: center;
     font-family: StampyLight;
 }
@@ -74,16 +75,16 @@
     background-color: white;
 }
 .content-centered {
-    background-color: #B8E5FA;
+    background-color: #D1EEFE;
 }
 
 .gutter {
-    background-color: #B8E5FA;
+    background-color: #D1EEFE;
     min-height: 100vh;
     overflow: visible;
-    background: #B8E5FA url("../images/cinnamoroll.jpg");
-    background-size: 150%;
-    background-repeat: no-repeat;
+    background: #B8E5FA url("../images/cinammoroll_quality_v1.png");
+    background-size: 100%;
+    background-repeat: repeat;
     background-position-x: center;
     background-position-y: top;
 }

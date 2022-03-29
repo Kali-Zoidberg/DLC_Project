@@ -18,7 +18,7 @@ public class BoardSquaresController {
     public ResponseGetAllBoardSquaresModel getAllBoardSquares() {
 
 
-        String sql = "SELECT * FROM dlc_db.board_squares WHERE completed=0;";
+        String sql = "SELECT * FROM dlc_db.board_squares WHERE completed=0 ORDER BY points;";
 
 
 

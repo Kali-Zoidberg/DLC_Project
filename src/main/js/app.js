@@ -95,17 +95,18 @@ class App extends React.Component {
         //Construct jeopardysquares
         return (
             <React.Fragment>
-                <div className="row site-header">
-                    <h1>
-                    Delta Lambda Chi - Sisterhood
-                    </h1>
-                </div>
+
                 <div className="row">
                     <div className="col-2 gutter" id="gutter-left">
                     </div>
                     <div className="col-8 content-centered">
+                        <div className="row site-header">
+                            <h1>
+                                Delta Lambda Chi - Sisterhood
+                            </h1>
+                        </div>
                         <div className="page even">
-                            <JeopardyBoardComp jeopardySquares={this.state.jeopardySquares} squaresPerRow={3}/>
+                            <JeopardyBoardComp jeopardySquares={this.state.jeopardySquares} squaresPerRow={4}/>
                         </div>
                         <div className="page odd">
                         <BarChartRaceComp data={this.state.barChart.data} names={this.state.barChart.names}/>
