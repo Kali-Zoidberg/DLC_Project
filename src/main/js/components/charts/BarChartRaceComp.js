@@ -12,18 +12,18 @@ class BarChartRaceComp extends React.Component {
         this.width = 1000;
         this.n=28;
         this.k=28;
-        this.duration = 60;
+        this.duration = 90;
         d3.group(this.data, d => d.name)
         this.datevalues = Array.from(d3.rollup(this.data, ([d]) => d.value, d => (new Date(d.date)), d => d.name))
             .map(([date, data]) => [new Date(date), data])
             .sort(([a], [b]) => d3.ascending(a, b));
-        this.keyframes = this.some_keyframes();
 
+        this.keyframes = this.some_keyframes();
         this.nameframes = d3.groups(this.keyframes.flatMap(([, data]) => data), d => d.name);
+
         this.prev = new Map(this.nameframes.flatMap(([, data]) => d3.pairs(data, (a, b) => [b, a])));
         this.next = new Map(this.nameframes.flatMap(([, data]) => d3.pairs(data)));
-        // console.log(this.prev);
-        // console.log(this.next);
+
         this.barSize = 42;
         this.margin = ({top: 16, right: 6, bottom: 6, left: 0});
         this.height = this.margin.top + this.barSize * this.n + this.margin.bottom;
