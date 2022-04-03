@@ -86,9 +86,13 @@ class App extends React.Component {
             });
     }
 
+    openChallengeSubmissionLink() {
+        window.location.href = "https://l.facebook.com/l.php?u=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLSfCMFlN01tkal3MpjreGdEtQEcwT5rD0N7IXsGnsdvAjNSyzg%2Fviewform%3Ffbclid%3DIwAR0fKUavJIIxwi5rgZTxcPdcfD1rlcOtfJ5QupVi0MONVcsPuEBvLyGIKqE&h=AT0EqTqkTi_RWElti3i8rZ--osQoHE6YangpO24dPN8BfCBhjFLh0VzC4nDCLA-YbDUvpz2JDohPezknHNjFTK2hc4T-NZM65meqIFhYdw6pZ_BaBOLx7h-HjKNFDWOUATTRXypRTSc0xQUJEuA";
+    }
+
     render() {
         if (this.state.barChart === undefined) {
-            return 'Loading....';
+            return '<div className="content-centered"> <h1>Loading....</h1> </div>';
         }
         // console.log(this.state.barChart);
         //Get JeopardySquares from backend
@@ -100,15 +104,22 @@ class App extends React.Component {
                     <div className="col-2 gutter" id="gutter-left">
                     </div>
                     <div className="col-8 content-centered">
-                        <div className="row site-header">
+                        <div className="row site-header rounded">
                             <h1>
                                 Delta Lambda Chi - Sisterhood
                             </h1>
                         </div>
-                        <div className="page even">
+
+                        <div className="page even py-3">
                             <JeopardyBoardComp jeopardySquares={this.state.jeopardySquares} squaresPerRow={4}/>
+                            <div className="challengeSubmissionDiv">
+                                <button type="button" className="btn btn-light btn-lg submitChallengeButton border border-dark" onClick={this.openChallengeSubmissionLink}>
+                                    Submit Challenge
+                                </button>
+                            </div>
                         </div>
-                        <div className="page odd">
+
+                        <div className="page odd mt-4">
                         <BarChartRaceComp data={this.state.barChart.data} names={this.state.barChart.names}/>
                         </div>
                     </div>
